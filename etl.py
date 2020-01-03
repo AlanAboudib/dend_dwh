@@ -4,12 +4,31 @@ from sql_queries import copy_table_queries, insert_table_queries
 
 
 def load_staging_tables(cur, conn):
+    """
+       Executes the COPY queries that transfer data from S3 to
+       staging tables.
+
+       Args:
+           cur: a cursor pointing to the database on RedShift throug which
+                queries are sent.
+           conn: The database connection object.
+    """    
+
     for query in copy_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def insert_tables(cur, conn):
+    """
+       Executes the INSERT INTO queries that transfer data from 
+       staging tables to fact and dimensional tables in the star schema
+
+       Args:
+           cur: a cursor pointing to the database on RedShift throug which
+                queries are sent.
+           conn: The database connection object.
+    """    
     for query in insert_table_queries:
         cur.execute(query)
         conn.commit()

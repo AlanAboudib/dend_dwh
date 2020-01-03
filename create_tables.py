@@ -4,12 +4,33 @@ from sql_queries import create_table_queries, drop_table_queries
 
 
 def drop_tables(cur, conn):
+    """
+       Executes the DROP TABLE queries that allow to drop all staging and 
+       fact and dimensional tables
+
+       Args:
+           cur: a cursor pointing to the database on RedShift throug which
+                queries are sent.
+           conn: The database connection object.
+    """    
+    
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """
+       Executes the CREATE TABLE queries that allow to create all staging and 
+       fact and dimensional tables
+
+
+       Args:
+           cur: a cursor pointing to the database on RedShift throug which
+                queries are sent.
+           conn: The database connection object.
+    """    
+    
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
